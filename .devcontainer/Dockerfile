@@ -1,4 +1,4 @@
-FROM osrf/ros:jazzy-desktop-full
+FROM osrf/ros:humble-desktop-full
 
 # Set up dev packages
 ENV DEBIAN_FRONTEND=noninteractive
@@ -19,6 +19,8 @@ RUN apt-get update \
     libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-util1 \
     libxcb-xinerama0 libxcb-xkb1 libxkbcommon0 libxkbcommon-x11-0 \
     libglu1-mesa libxi6 libsm6 libxrender1 libfontconfig1 \
+   # For WATT users
+    gedit \
    # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
@@ -74,8 +76,9 @@ ENV DEBIAN_FRONTEND=dialog
 #    && rm -rf /var/lib/apt/lists/*
 # ENV DEBIAN_FRONTEND=dialog
 
-# Set up auto-source of workspace for ros 
-ARG USERNAME=ros
+# Set up auto-source of workspace for watt
+ARG WORKSPACE
+ARG USERNAME=watt
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
@@ -105,7 +108,14 @@ RUN  echo "if [ -f /opt/ros/${ROS_DISTRO}/setup.bash ]; then source /opt/ros/${R
   && echo "if [ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash ]; then source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash; fi" >> /home/$USERNAME/.bashrc \
   && echo "if [ -f /usr/share/vcs2l-completion/vcs.bash ]; then source /usr/share/vcs2l-completion/vcs.bash; fi" >> /home/$USERNAME/.bashrc \
   # Set up auto-source of workspace for user
-  && echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/$USERNAME/.bashrc
+  && echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/$USERNAME/.bashrc \
+  # Set up for WATT user
+  && echo "# WATT Customs" >> /home/$USERNAME/.bashrc \
+  && echo "alias eb='gedit ~/.bashrc'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sb='source ~/.bashrc'" >> /home/$USERNAME/.bashrc \
+  && echo "alias cw='cd ${WORKSPACE}'" >> /home/$USERNAME/.bashrc \
+  && echo "alias cs='cd ${WORKSPACE}/src'" >> /home/$USERNAME/.bashrc \
+  && echo "alias cm='cd ${WORKSPACE} && ./build.sh'" >> /home/$USERNAME/.bashrc
 
 # Set up python symlinks for vscode paths
 RUN PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')") \

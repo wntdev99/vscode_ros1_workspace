@@ -5,13 +5,14 @@
 	"build": {
 		"args": {
 			"WORKSPACE": "${containerWorkspaceFolder}"
-			// "USERNAME": "ros",
+			// "USERNAME": "watt",
 			// "USER_UID": "1000", //Change to match your UID
 			// "USER_GID": "1000" // Change to match your GID
 		},
 		"options": ["--pull"]
 	},
 	"runArgs": [
+		"--name=watt-ros2-dev",
 		"--network=host",
 		"--cap-add=SYS_PTRACE",
 		"--security-opt=seccomp:unconfined",
@@ -45,10 +46,19 @@
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
-	"remoteUser": "ros",
+	"remoteUser": "watt",
+	// "initializeCommand": "mkdir -p ~/.claude",
+	// "postCreateCommand": "cd ${containerWorkspaceFolder}/src && vcs import --recursive < ros2.repos",
+	"mounts": [
+		// Claude Code 인증 정보 유지
+		"source=${localEnv:HOME}/.claude,target=/home/watt/.claude,type=bind,consistency=cached"
+	],
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {
+			"settings": {
+				"terminal.integrated.hideOnStartup": "never"
+			},
 			"extensions": [
 				"althack.ament-task-provider",
 				"betwo.b2-catkin-tools",
@@ -62,7 +72,8 @@
 				"streetsidesoftware.code-spell-checker",
 				"twxs.cmake",
 				"yzhang.markdown-all-in-one",
-				"zachflower.uncrustify"
+				"zachflower.uncrustify",
+				"Anthropic.claude-code"
 			]
 		}
 	}

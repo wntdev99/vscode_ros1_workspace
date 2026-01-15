@@ -1,122 +1,122 @@
-# VSCode ROS2 Workspace Template
+# VSCode ROS2 워크스페이스 템플릿
 
-This template will get you set up using ROS2 with VSCode as your IDE.
+이 템플릿은 VSCode를 IDE로 사용하여 ROS2 개발 환경을 설정하는 데 도움을 줍니다.
 
-See [how I develop with vscode and ros2](https://www.allisonthackston.com/articles/vscode_docker_ros2.html) for a more in-depth look on how to use this workspace.
+이 워크스페이스의 자세한 사용 방법은 [VSCode와 ROS2로 개발하는 방법](https://www.allisonthackston.com/articles/vscode_docker_ros2.html)을 참조하세요.
 
-## Features
+## 기능
 
-### Style
+### 코드 스타일
 
-ROS2-approved formatters are included in the IDE.  
+ROS2 공식 포맷터가 IDE에 포함되어 있습니다.
 
-* **c++** uncrustify; config from `ament_uncrustify`
-* **python** autopep8; vscode settings consistent with the [style guide](https://docs.ros.org/en/jazzy/The-ROS2-Project/Contributing/Code-Style-Language-Versions.html)
+* **C++** uncrustify; `ament_uncrustify` 설정 사용
+* **Python** autopep8; [스타일 가이드](https://docs.ros.org/en/humble/The-ROS2-Project/Contributing/Code-Style-Language-Versions.html)와 일관된 VSCode 설정
 
-### Tasks
+### 태스크
 
-There are many pre-defined tasks, see [`.vscode/tasks.json`](.vscode/tasks.json) for a complete listing.  Feel free to adjust them to suit your needs.  
+다양한 사전 정의된 태스크가 있습니다. 전체 목록은 [`.vscode/tasks.json`](.vscode/tasks.json)을 참조하세요. 필요에 따라 자유롭게 수정하세요.
 
-Take a look at [how I develop using tasks](https://www.allisonthackston.com/articles/vscode_tasks.html) for an idea on how I use tasks in my development.
+태스크를 활용한 개발 방법에 대한 아이디어는 [태스크를 사용한 개발 방법](https://www.allisonthackston.com/articles/vscode_tasks.html)을 참조하세요.
 
-### Debugging
+### 디버깅
 
-This template sets up debugging for python files, gdb for cpp programs and ROS launch files.  See [`.vscode/launch.json`](.vscode/launch.json) for configuration details.
+이 템플릿은 Python 파일 디버깅, C++ 프로그램용 gdb, ROS launch 파일 디버깅을 설정합니다. 설정 세부 사항은 [`.vscode/launch.json`](.vscode/launch.json)을 참조하세요.
 
-### Continuous Integration
+### 지속적 통합 (CI)
 
-The template also comes with basic continuous integration set up. See [`.github/workflows/ros.yaml`](/.github/workflows/ros.yaml).
+이 템플릿에는 기본적인 지속적 통합 설정도 포함되어 있습니다. [`.github/workflows/ros.yaml`](/.github/workflows/ros.yaml)을 참조하세요.
 
-To remove a linter just delete it's name from this line:
+린터를 제거하려면 아래 줄에서 해당 린터의 이름을 삭제하면 됩니다:
 
 ```yaml
       matrix:
           linter: [cppcheck, cpplint, uncrustify, lint_cmake, xmllint, flake8, pep257]
 ```
 
-## How to use this template
+## 템플릿 사용 방법
 
-### Prerequisites
+### 사전 요구 사항
 
-You should already have Docker and VSCode with the remote containers plugin installed on your system.
+시스템에 Docker와 원격 컨테이너 플러그인이 설치된 VSCode가 이미 있어야 합니다.
 
-* [docker](https://docs.docker.com/engine/install/)
-* [vscode](https://code.visualstudio.com/)
-* [vscode remote containers plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+* [Docker](https://docs.docker.com/engine/install/)
+* [VSCode](https://code.visualstudio.com/)
+* [VSCode 원격 컨테이너 플러그인](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-#### NVidia support
+#### NVidia 지원
 
-To make nvidia driver and opengl available in docker, follow the installation instructions for docker-nvidia.
-They include the steps in docker and add the additional gpu layer.
+Docker에서 NVIDIA 드라이버와 OpenGL을 사용하려면 docker-nvidia 설치 지침을 따르세요.
+Docker 설치 단계와 추가 GPU 레이어 설정이 포함되어 있습니다.
 
-* [docker-nvidia (includes docker install and additional installation for NVidia GPU accelerated hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+* [docker-nvidia (NVIDIA GPU 가속 호스트를 위한 Docker 설치 및 추가 설정)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
-### Get the template
+### 템플릿 가져오기
 
-Click on "use this template"
+"use this template" 클릭
 
 ![template_use](https://user-images.githubusercontent.com/6098197/91331899-43f23b80-e780-11ea-92c8-b4665ce126f1.png)
 
-### Create your repository
+### 저장소 생성
 
-On the next dialog, name the repository you would like to start and decide if you want all of the branches, or the default branch.
+다음 대화 상자에서 시작할 저장소 이름을 지정하고 모든 브랜치를 원하는지 기본 브랜치만 원하는지 결정합니다.
 
 > [!IMPORTANT]
-> 
-> The new default branch supports any version of ROS by setting the appropriate version you want in the 'FROM' line in `.devcontainer/Dockerfile`
 >
-> By default, this is set to `osrf/ros:jazzy-desktop-full`
+> 새 기본 브랜치는 `.devcontainer/Dockerfile`의 'FROM' 줄에서 원하는 버전을 설정하여 모든 버전의 ROS를 지원합니다.
+>
+> 기본값은 `osrf/ros:humble-desktop-full`로 설정되어 있습니다.
 
 ![template_new](https://user-images.githubusercontent.com/6098197/91332035-713ee980-e780-11ea-81d3-13b170f568b0.png)
 
-Github will then create a new repository with the contents of this one in your account.  It grabs the latest changes as "initial commit".
+그러면 GitHub가 이 템플릿의 내용으로 새 저장소를 계정에 생성합니다. 최신 변경 사항을 "initial commit"으로 가져옵니다.
 
-### Clone your repo
+### 저장소 클론
 
-Now you can clone your repo as normal
+이제 평소처럼 저장소를 클론할 수 있습니다.
 
 ![template_download](https://user-images.githubusercontent.com/6098197/91332342-e4e0f680-e780-11ea-9525-49b0afa0e4bb.png)
 
-### Open it in vscode
+### VSCode에서 열기
 
-Now that you've cloned your repo onto your computer, you can open it in VSCode (File->Open Folder).
+컴퓨터에 저장소를 클론했으면 VSCode에서 열 수 있습니다 (파일->폴더 열기).
 
-When you open it for the first time, you should see a little popup that asks you if you would like to open it in a container.  Say yes!
+처음 열면 컨테이너에서 열 것인지 묻는 작은 팝업이 표시됩니다. 예를 선택하세요!
 
 ![template_vscode](https://user-images.githubusercontent.com/6098197/91332551-36898100-e781-11ea-9080-729964373719.png)
 
-If you don't see the pop-up, click on the little green square in the bottom left corner, which should bring up the container dialog
+팝업이 표시되지 않으면 왼쪽 하단의 작은 녹색 사각형을 클릭하면 컨테이너 대화 상자가 나타납니다.
 
 ![template_vscode_bottom](https://user-images.githubusercontent.com/6098197/91332638-5d47b780-e781-11ea-9fb6-4d134dbfc464.png)
 
-In the dialog, select "Remote Containers: Reopen in container"
+대화 상자에서 "Remote Containers: Reopen in container"를 선택합니다.
 
-VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open a terminal inside VSCode (Terminal->New Terminal), you should see that your username has been changed to `ros`, and the bottom left green corner should say "Dev Container"
+VSCode가 `.devcontainer` 내부의 dockerfile을 빌드합니다. VSCode 내에서 터미널을 열면 (터미널->새 터미널), 사용자 이름이 `ros`로 변경되었고 왼쪽 하단 녹색 모서리에 "Dev Container"라고 표시되는 것을 볼 수 있습니다.
 
 ![template_container](https://user-images.githubusercontent.com/6098197/91332895-adbf1500-e781-11ea-8afc-7a22a5340d4a.png)
 
-### Update the template with your code
+### 템플릿을 코드로 업데이트
 
-1. Specify the repositories you want to include in your workspace in `src/ros2.repos` or delete `src/ros2.repos` and develop directly within the workspace.
-2. If you are using a `ros2.repos` file, import the contents `Terminal->Run Task..->import from workspace file`
-3. Install dependencies `Terminal->Run Task..->install dependencies`
-4. (optional) Adjust scripts to your liking.  These scripts are used both within tasks and CI.
-   * `setup.sh` The setup commands for your code.  Default to import workspace and install dependencies.
-   * `build.sh` The build commands for your code.  Default to `--merge-install` and `--symlink-install`
-   * `test.sh` The test commands for your code.
-5. Develop!
+1. `src/ros2.repos`에 워크스페이스에 포함할 저장소를 지정하거나 `src/ros2.repos`를 삭제하고 워크스페이스 내에서 직접 개발합니다.
+2. `ros2.repos` 파일을 사용하는 경우 `터미널->태스크 실행..->import from workspace file`로 내용을 가져옵니다.
+3. 의존성 설치 `터미널->태스크 실행..->install dependencies`
+4. (선택 사항) 스크립트를 원하는 대로 조정합니다. 이 스크립트는 태스크와 CI 모두에서 사용됩니다.
+   * `setup.sh` 코드 설정 명령어. 기본값은 워크스페이스 가져오기 및 의존성 설치.
+   * `build.sh` 코드 빌드 명령어. 기본값은 `--merge-install` 및 `--symlink-install`
+   * `test.sh` 코드 테스트 명령어.
+5. 개발 시작!
 
 ## FAQ
 
 ### XAuthority
 
-If you see the error:
+다음과 같은 오류가 표시되는 경우:
 
 ```text
 Authorization required, but no authorization protocol specified Unable to open display: :0 Authorization required, but no authorization protocol specified
 ```
 
-You may need to update the UID/GID to match yours.  In `.devcontainer/devcontainer.json` update the lines that are marked `Change to match your UID` and `Change to match your GID`
+UID/GID를 본인의 것과 일치하도록 업데이트해야 할 수 있습니다. `.devcontainer/devcontainer.json`에서 `Change to match your UID` 및 `Change to match your GID`로 표시된 줄을 업데이트하세요.
 
 .devcontainer/devcontainer.json
 
@@ -139,50 +139,50 @@ You may need to update the UID/GID to match yours.  In `.devcontainer/devcontain
 
 ### XDisplay
 
-If you see the error:
+다음과 같은 오류가 표시되는 경우:
 
 ```text
 Couldn't open X display in GLXGLSupport::getGLDisplay at ./.obj-x86_64-linux-gnu/ogre_vendor-prefix/src/ogre_vendor/RenderSystems/GLSupport/src/GLX/OgreGLXGLSupport.cpp
 ```
 
-You need to remove or comment out the wayland options
+Wayland 옵션을 제거하거나 주석 처리해야 합니다.
 
 ```jsonc
  "runArgs": [
   ...
-  // Wayland host
+  // Wayland 호스트
   //"--volume=/mnt/wslg:/mnt/wslg",
   // "--volume=/run/user/1000:/run/user/1000",
-  // uncomment to use intel iGPU
+  // Intel 내장 그래픽을 사용하려면 주석 해제
   // "--device=/dev/dri"
   ...
  ],
  ...
   "containerEnv": {
   ...
-  // For Wayland
+  // Wayland용
   // "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
   // "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
-  // "QT_QPA_PLATFORM": "wayland", // Force Wayland
+  // "QT_QPA_PLATFORM": "wayland", // Wayland 강제
   ...
  },
 ```
 
 ### WSL2
 
-#### The gui doesn't show up
+#### GUI가 표시되지 않음
 
-This is likely because the DISPLAY environment variable is not getting set properly.
+DISPLAY 환경 변수가 제대로 설정되지 않았기 때문일 수 있습니다.
 
-1. Find out what your DISPLAY variable should be
+1. DISPLAY 변수가 무엇이어야 하는지 확인
 
-      In your WSL2 Ubuntu instance
+      WSL2 Ubuntu 인스턴스에서
 
       ```bash
       echo $DISPLAY
       ```
 
-2. Copy that value into the `.devcontainer/devcontainer.json` file
+2. 해당 값을 `.devcontainer/devcontainer.json` 파일에 복사
 
       ```jsonc
       "containerEnv": {
@@ -190,9 +190,9 @@ This is likely because the DISPLAY environment variable is not getting set prope
       }
       ```
 
-#### I want to use vGPU
+#### vGPU 사용하기
 
-If you want to access the vGPU through WSL2, you'll need to add additional components to the `.devcontainer/devcontainer.json` file in accordance to [these directions](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)
+WSL2를 통해 vGPU에 액세스하려면 [이 지침](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)에 따라 `.devcontainer/devcontainer.json` 파일에 추가 구성 요소를 추가해야 합니다.
 
 ```jsonc
  "runArgs": [
@@ -207,56 +207,56 @@ If you want to access the vGPU through WSL2, you'll need to add additional compo
   "--gpus=all"
  ],
  "containerEnv": {
-  "DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+  "DISPLAY": "${localEnv:DISPLAY}", // GUI에 필요, Windows에서는 ":0" 시도
   "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
   "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
   "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
   "LD_LIBRARY_PATH": "/usr/lib/wsl/lib",
-  "LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+  "LIBGL_ALWAYS_SOFTWARE": "1" // OpenGL 소프트웨어 렌더링에 필요
  },
 ```
 
-### Repos are not showing up in VS Code source control
+### 저장소가 VS Code 소스 제어에 표시되지 않음
 
-This is likely because vscode doesn't necessarily know about other repositories unless you've added them directly.
+VSCode가 직접 추가하지 않은 다른 저장소를 인식하지 못하기 때문일 수 있습니다.
 
 ```text
-File->Add Folder To Workspace
+파일->워크스페이스에 폴더 추가
 ```
 
 ![Screenshot-26](https://github.com/athackst/vscode_ros2_workspace/assets/6098197/d8711320-2c16-463b-9d67-5bd9314acc7f)
 
-Or you've added them as a git submodule.
+또는 git 서브모듈로 추가한 경우입니다.
 
 ![Screenshot-27](https://github.com/athackst/vscode_ros2_workspace/assets/6098197/8ebc9aac-9d70-4b53-aa52-9b5b108dc935)
 
-To add all of the repos in your *.repos file, run the script
+*.repos 파일의 모든 저장소를 추가하려면 스크립트를 실행하세요.
 
 ```bash
 python3 .devcontainer/repos_to_submodules.py
 ```
 
-or run the task titled `add submodules from .repos`
+또는 `add submodules from .repos` 태스크를 실행합니다.
 
-### Error handling for GPU acceleration
+### GPU 가속 오류 처리
 
-#### Docker image cannot be built:
+#### Docker 이미지를 빌드할 수 없음:
 
-The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part.
+Dockerfile은 빌드할 수 있지만 devcontainer.json을 사용하면 "docker container cannot connect to device [[gpu]]"와 같은 오류 메시지가 표시되는 경우 Docker 자체는 설치되었지만 위에서 언급한 nvidia 부분이 설치되지 않은 것입니다.
 
-Solution is, to follow the guide and the test with nvidia-smi as indicated here:
+해결 방법은 가이드를 따르고 여기에 표시된 대로 nvidia-smi로 테스트하는 것입니다:
 
-- [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+- [docker-nvidia (Nvidia GPU 호스트에서 GPU 가속용)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
-#### Programs in Docker cannot access GPU
+#### Docker의 프로그램이 GPU에 액세스할 수 없음
 
-Error messages that show lacking GPU acceleration (in docker terminal)
+GPU 가속 부족을 나타내는 오류 메시지 (Docker 터미널에서)
 
 ```bash
 sudo apt-get update   && sudo apt-get install -y -qq glmark2   && glmark2
 ```
 
-results in:
+결과:
 
 ```bash
    libGL error: No matching fbConfigs or visuals found
@@ -268,10 +268,10 @@ results in:
    Current serial number in output stream:  47
 ```
 
-Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
-[docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+해결 방법은 가이드를 따르고 여기에 표시된 대로 nvidia-smi로 테스트하는 것입니다:
+[docker-nvidia (Nvidia GPU 호스트에서 GPU 가속용)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
-#### more information
+#### 추가 정보
 
 https://wiki.ros.org/docker/Tutorials/GUI
 https://medium.com/@benjamin.botto/opengl-and-cuda-applications-in-docker-af0eece000f1

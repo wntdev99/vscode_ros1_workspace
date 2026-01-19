@@ -4,7 +4,11 @@
 # Example:
 ############
 repositories:
-  examples:
+  # examples:
+  #   type: git
+  #   url: https://github.com/ros2/examples.git
+  #   version: humble
+  w_sim_gazebo:
     type: git
-    url: https://github.com/ros2/examples.git
-    version: humble
+    url: https://github.com/3watt/w_sim_gazebo.git
+    version: main

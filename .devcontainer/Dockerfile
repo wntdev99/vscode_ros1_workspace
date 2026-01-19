@@ -19,9 +19,14 @@ RUN apt-get update \
     libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-util1 \
     libxcb-xinerama0 libxcb-xkb1 libxkbcommon0 libxkbcommon-x11-0 \
     libglu1-mesa libxi6 libsm6 libxrender1 libfontconfig1 \
-   # For WATT users
+    # For WATT users
     gedit \
-   # Clean up
+    # For packages
+    ros-humble-topic-tools \
+    ros-humble-tf-transformations ros-humble-tf2-tools ros-humble-rqt-tf-tree \
+    ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-ign-ros2-control \ 
+    ros-humble-navigation2 ros-humble-nav2-bringup \
+    # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*

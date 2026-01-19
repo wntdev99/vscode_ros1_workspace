@@ -48,7 +48,7 @@
 	},
 	"remoteUser": "watt",
 	// "initializeCommand": "mkdir -p ~/.claude",
-	// "postCreateCommand": "cd ${containerWorkspaceFolder}/src && vcs import --recursive < ros2.repos",
+	"postCreateCommand": "cd ${containerWorkspaceFolder}/src && vcs import --recursive < ros2.repos",
 	"mounts": [
 		// Claude Code 인증 정보 유지
 		"source=${localEnv:HOME}/.claude,target=/home/watt/.claude,type=bind,consistency=cached"

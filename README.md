@@ -1,3 +1,20 @@
+# WATT 사용법
+1. docker 설치(이미 설치되어있다면 4번으로)  
+   [공식 설치 링크](https://docs.docker.com/engine/install/)
+2. docker desktop 설치 (option)   
+      [공식 설치 링크](https://docs.docker.com/desktop/setup/install/linux/)
+
+3. ```docker ps``` 로 설치 확인
+   만약 권한 문제 발생시 docker 권한 부여  
+   ```sudo usermod -aG docker {HOSTNAME}```  
+   ex) ```sudo usermod -aG docker injae```
+   
+4. git clone (workspace scale)    
+```git clone https://github.com/3watt/vscode_ros2_workspace.git```
+5. vscode로 열기
+6. ctrl + shift + p 눌러 rebuild and reopen in container 옵션 선택
+      <img width="598" height="101" alt="image" src="https://github.com/user-attachments/assets/09bcda70-9b7c-4658-a231-1f669a14292a" />
+7. 완료 
 # VSCode ROS2 워크스페이스 템플릿
 
 이 템플릿은 VSCode를 IDE로 사용하여 ROS2 개발 환경을 설정하는 데 도움을 줍니다.

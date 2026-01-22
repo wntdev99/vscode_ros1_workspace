@@ -1,8 +1,8 @@
 {
     "editor.tabSize": 8,
-    "editor.rulers": [
-        100
-    ],
+    // "editor.rulers": [
+    //     100
+    // ],
     "files.associations": {
         "*.repos": "yaml",
         "*.world": "xml",

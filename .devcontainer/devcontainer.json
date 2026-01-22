@@ -48,10 +48,12 @@
 	},
 	"remoteUser": "watt",
 	// "initializeCommand": "mkdir -p ~/.claude",
-	"postCreateCommand": "cd ${containerWorkspaceFolder}/src && vcs import --recursive < ros2.repos",
+	"postCreateCommand": "sudo chown watt:watt ${containerWorkspaceFolder}/src && cd ${containerWorkspaceFolder}/src && vcs import --recursive < ../ros2.repos",
 	"mounts": [
 		// Claude Code 인증 정보 유지
-		"source=${localEnv:HOME}/.claude,target=/home/watt/.claude,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/.claude,target=/home/watt/.claude,type=bind,consistency=cached",
+		// src 폴더 전체를 Docker volume으로 (로컬과 분리)
+		"source=ros2_src,target=${containerWorkspaceFolder}/src,type=volume"
 	],
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {

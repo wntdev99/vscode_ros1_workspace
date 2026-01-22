@@ -26,6 +26,7 @@ RUN apt-get update \
     ros-humble-tf-transformations ros-humble-tf2-tools ros-humble-rqt-tf-tree \
     ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-ign-ros2-control \ 
     ros-humble-navigation2 ros-humble-nav2-bringup \
+    ros-humble-mola ros-humble-mola-state-estimation ros-humble-mola-lidar-odometry \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \

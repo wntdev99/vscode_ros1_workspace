@@ -11,4 +11,4 @@ repositories:
   w_sim_gazebo:
     type: git
     url: https://github.com/3watt/w_sim_gazebo.git
-    version: main
+    version: refactor/project-structure

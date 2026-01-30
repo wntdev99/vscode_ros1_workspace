@@ -23,7 +23,7 @@
 		"--volume=/mnt/wslg:/mnt/wslg",
 		"--ipc=host",
 		// uncomment to use intel iGPU
-		// "--device=/dev/dri"
+		"--device=/dev/dri",
 		// Share user run time settings
 		"--volume=/run/user/1000:/run/user/1000" // Change 1000 to match your UID
 		// uncomment to use Nvidia GPU with Linux, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
@@ -44,7 +44,7 @@
 		// "QT_QPA_PLATFORM": "wayland", // uncomment to force Wayland
 		// For audio
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+		"LIBGL_ALWAYS_SOFTWARE": "0" // Set "1" for software rendering of opengl
 	},
 	"remoteUser": "watt",
 	// "initializeCommand": "mkdir -p ~/.claude",

@@ -10,7 +10,7 @@
    ex) ```sudo usermod -aG docker injae```
 
 4. git clone (workspace scale)
-```git clone https://github.com/3watt/vscode_ros1_workspace.git```
+```git clone https://github.com/wntdev99/vscode_ros1_workspace.git```
 5. vscode로 열기
 6. ctrl + shift + p 눌러 rebuild and reopen in container 옵션 선택
       <img width="598" height="101" alt="image" src="https://github.com/user-attachments/assets/09bcda70-9b7c-4658-a231-1f669a14292a" />

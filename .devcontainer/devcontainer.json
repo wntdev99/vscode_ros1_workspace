@@ -44,16 +44,22 @@
 		// "QT_QPA_PLATFORM": "wayland", // uncomment to force Wayland
 		// For audio
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-		"LIBGL_ALWAYS_SOFTWARE": "0" // Set "1" for software rendering of opengl
+		"LIBGL_ALWAYS_SOFTWARE": "0", // Set "1" for software rendering of opengl
+		// For stable GUI in Docker (rviz, rqt, gazebo, flexbe_app)
+		"QT_X11_NO_MITSHM": "1",
+		"NO_AT_BRIDGE": "1"
 	},
 	"remoteUser": "watt",
-	// "initializeCommand": "mkdir -p ~/.claude",
-	"postCreateCommand": "sudo chown watt:watt ${containerWorkspaceFolder}/src && cd ${containerWorkspaceFolder}/src && vcs import --recursive < ../ros2.repos",
+	"initializeCommand": "xhost +local:docker 2>/dev/null || true",
+	"postCreateCommand": "sudo chown watt:watt ${containerWorkspaceFolder}/src && vcs import ${containerWorkspaceFolder}/src < ${containerWorkspaceFolder}/ros1.repos && bash -c 'cd ${containerWorkspaceFolder} && source /opt/ros/${ROS_DISTRO}/setup.bash && catkin build'",
+	"postStartCommand": "sudo service dbus start 2>/dev/null || true; (rosdep update --rosdistro=$ROS_DISTRO 2>/dev/null || true)",
 	"mounts": [
 		// Claude Code 인증 정보 유지
 		"source=${localEnv:HOME}/.claude,target=/home/watt/.claude,type=bind,consistency=cached",
+		// SSH 키 마운트 (GitHub 접근용)
+		"source=${localEnv:HOME}/.ssh,target=/home/watt/.ssh,type=bind,readonly",
 		// src 폴더 전체를 Docker volume으로 (로컬과 분리)
-		"source=ros2_src,target=${containerWorkspaceFolder}/src,type=volume"
+		"source=ros1_noetic_src,target=${containerWorkspaceFolder}/src,type=volume"
 	],
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
@@ -62,7 +68,6 @@
 				"terminal.integrated.hideOnStartup": "never"
 			},
 			"extensions": [
-				"althack.ament-task-provider",
 				"betwo.b2-catkin-tools",
 				"DotJoshJohnson.xml",
 				"ms-azuretools.vscode-docker",

@@ -1,5 +1,15 @@
-build/*
-install/*
-log/*
-site/*
-src/*
+# Catkin workspace (ROS1)
+build/
+devel/
+logs/
+.catkin_tools/
+
+# ROS2 (if any)
+install/
+log/
+
+# Source (Docker volume)
+src/
+
+# Other
+site/

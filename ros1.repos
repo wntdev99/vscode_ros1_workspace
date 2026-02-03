@@ -1,0 +1,46 @@
+# List of repositories to use within your workspace
+# See https://github.com/dirk-thomas/vcstool
+############
+# Example:
+############
+repositories:
+  watt_inorbit:
+    type: git
+    url: git@github.com:3watt/watt_inorbit.git
+    version: main
+  watt_behavior:
+    type: git
+    url: git@github.com:3watt/watt_behaviors.git
+    version: porter-raemian-gallery
+  flexbe_app:
+    type: git
+    url: https://github.com/FlexBE/flexbe_app.git
+    version: noetic
+  flexbe_behavior_engine:
+    type: git
+    url: https://github.com/FlexBE/flexbe_behavior_engine.git
+    version: noetic
+  james_api:
+    type: git
+    url: git@github.com:3watt/james_api.git
+    version: raemiangallery
+  watt_robot_msgs:
+    type: git
+    url: git@github.com:3watt/watt_robot_msgs.git
+    version: main
+  watt_robot_hri:
+    type: git
+    url: git@github.com:3watt/watt_robot_hri.git
+    version: main
+  watt_server:
+    type: git
+    url: git@github.com:3watt/watt_server.git
+    version: porter-251031
+  watt_robot_common:
+    type: git
+    url: git@github.com:3watt/watt_robot_common.git
+    version: porter-251031
+  laser_line_extraction:
+    type: git
+    url: https://github.com/kam3k/laser_line_extraction.git
+    version: master

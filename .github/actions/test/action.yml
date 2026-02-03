@@ -1,6 +1,6 @@
 name: 'Test'
-description: 'Test using devcontainer'
+description: 'Test ROS1 code'
 runs:
   using: 'docker'
-  image: '../../../.devcontainer/Dockerfile'
+  image: 'docker://osrf/ros:noetic-desktop-full'
   entrypoint: ".github/actions/test/run.sh"

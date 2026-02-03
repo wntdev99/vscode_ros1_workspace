@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(docker ps:*)"
+      "Bash(docker ps:*)",
+      "Bash(sudo apt-get update:*)",
+      "Bash(sudo apt-get install:*)",
+      "Bash(source:*)",
+      "Bash(rospack find:*)",
+      "Bash(catkin build:*)",
+      "Bash(rosservice list:*)",
+      "Bash(rosservice call:*)",
+      "Bash(kill:*)",
+      "Bash(apt-cache search:*)",
+      "Bash(catkin clean:*)",
+      "Bash(pip3 install:*)",
+      "Bash(ssh:*)"
     ]
   }
 }

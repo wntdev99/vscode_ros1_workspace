@@ -44,182 +44,80 @@
             "label": "clean",
             "detail": "Run the clean target",
             "type": "shell",
-            "command": "colcon build --cmake-target clean",
+            "command": "catkin clean -y",
             "problemMatcher": "$gcc"
         },
         {
             "label": "purge",
             "detail": "Purge workspace by deleting all generated files.",
             "type": "shell",
-            "command": "sudo rm -fr build install log; sudo py3clean .",
+            "command": "sudo rm -fr build devel logs .catkin_tools; sudo py3clean .",
             "problemMatcher": []
         },
         {
             "label": "source",
-            "detail": "Source workspace",
+            "detail": "Source workspace (ROS + devel)",
             "type": "shell",
-            "command": "source /opt/ros/${env:ROS_DISTRO}/setup.bash",
+            "command": "source /opt/ros/${env:ROS_DISTRO}/setup.bash && if [ -f devel/setup.bash ]; then source devel/setup.bash; fi",
             "problemMatcher": []
         },
         // Linting and static code analysis tasks
         {
-            "label": "fix",
-            "detail": "Reformat files with uncrustify.",
+            "label": "cppcheck",
+            "detail": "Run static code checker cppcheck.",
             "type": "shell",
-            "command": "ament_uncrustify --reformat src/",
-            "problemMatcher": []
-        },
-        {
-            "label": "uncrustify",
-            "detail": "Lint files with uncrustify.",
-            "type": "shell",
-            "command": "ament_uncrustify src/",
+            "command": "cppcheck --enable=all --inconclusive src/",
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
             },
-            "problemMatcher": [
-                {
-                    "owner": "uncrustify",
-                    "source": "uncrustify",
-                    "fileLocation": "relative",
-                    "pattern": [
-                        // just the file name message
-                        {
-                            "regexp": "^(.*)'(.*)':",
-                            "kind": "file",
-                            "file": 2,
-                            "message": 1
-                        }
-                    ]
-                }
-            ]
+            "problemMatcher": []
         },
         {
             "label": "cpplint",
             "detail": "Lint files with cpplint.",
-            "type": "ament",
-            "task": "cpplint",
-            "path": "src/",
-            "problemMatcher": "$ament_cpplint",
+            "type": "shell",
+            "command": "cpplint --recursive src/",
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
             },
-        },
-        {
-            "label": "cppcheck",
-            "detail": "Run static code checker cppcheck.",
-            "type": "ament",
-            "task": "cppcheck",
-            "path": "src/",
-            "problemMatcher": "$ament_cppcheck",
-            "presentation": {
-                "panel": "dedicated",
-                "reveal": "silent",
-                "clear": true
-            },
-            "options": {
-                "env": {
-                    "AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS": "1"
-                }
-            }
-        },
-        {
-            "label": "lint_cmake",
-            "detail": "Run lint on cmake files.",
-            "type": "ament",
-            "task": "lint_cmake",
-            "path": "src/",
-            "problemMatcher": "$ament_lint_cmake",
-            "presentation": {
-                "panel": "dedicated",
-                "reveal": "silent",
-                "clear": true
-            }
+            "problemMatcher": []
         },
         {
             "label": "flake8",
             "detail": "Run flake8 on python files.",
-            "type": "ament",
-            "task": "flake8",
-            "path": "src/",
-            "problemMatcher": "$ament_flake8",
+            "type": "shell",
+            "command": "flake8 src/",
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
-            }
-        },
-        {
-            "label": "pep257",
-            "detail": "Run pep257 on python files.",
-            "type": "ament",
-            "task": "pep257",
-            "path": "src/",
-            "problemMatcher": "$ament_pep257",
-            "presentation": {
-                "panel": "dedicated",
-                "reveal": "silent",
-                "clear": true
-            }
-        },
-        {
-            "label": "xmllint",
-            "detail": "Run xmllint on xml files.",
-            "type": "ament",
-            "task": "xmllint",
-            "path": "src/",
-            "problemMatcher": "$ament_xmllint",
-            "presentation": {
-                "panel": "dedicated",
-                "reveal": "silent",
-                "clear": true
-            }
-        },
-        {
-            "label": "lint all",
-            "detail": "Run all linters.",
-            "dependsOn": [
-                "cppcheck",
-                "cpplint",
-                "flake8",
-                "lint_cmake",
-                "pep257",
-                "xmllint",
-                "uncrustify"
-            ],
+            },
             "problemMatcher": []
         },
         // Workspace editing tasks
         {
-            "label": "new ament_cmake package",
-            "detail": "Create a new ROS cpp package from a template.",
+            "label": "new catkin package",
+            "detail": "Create a new ROS catkin package from a template.",
             "type": "shell",
-            "command": "ros2 pkg create --destination-directory src --build-type ament_cmake ${input:package}",
-            "problemMatcher": []
-        },
-        {
-            "label": "new ament_python package",
-            "detail": "Create a new ROS python package from a template.",
-            "type": "shell",
-            "command": "ros2 pkg create --destination-directory src --build-type ament_python ${input:package}",
+            "command": "cd src && catkin_create_pkg ${input:package} std_msgs rospy roscpp",
             "problemMatcher": []
         },
         {
             "label": "import from workspace file",
             "detail": "Use vcs to import modules specified by a workspace/rosinstall file.",
             "type": "shell",
-            "command": "envsubst < src/ros2.repos | vcs import src",
+            "command": "vcs import src < ros1.repos",
             "problemMatcher": []
         },
         {
             "label": "update workspace file",
             "detail": "Use vcs to update repositories in src to workspace file.",
             "type": "shell",
-            "command": "vcs export src > src/ros2.repos",
+            "command": "vcs export src > ros1.repos",
             "problemMatcher": []
         },
         {
@@ -237,10 +135,10 @@
             "problemMatcher": []
         },
         {
-            "label": "add submodules from .repos",
-            "detail": "Create a git submodule for all repositories in your .repos file",
+            "label": "catkin init",
+            "detail": "Initialize catkin workspace",
             "type": "shell",
-            "command": "python3 .devcontainer/repos_to_submodules.py",
+            "command": "catkin init && catkin config --extend /opt/ros/$ROS_DISTRO",
             "problemMatcher": []
         }
     ],

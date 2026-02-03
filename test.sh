@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ -f install/setup.bash ]; then source install/setup.bash; fi
-colcon test --merge-install
-colcon test-result --all --verbose
+if [ -f devel/setup.bash ]; then source devel/setup.bash; fi
+catkin run_tests
+catkin_test_results build/

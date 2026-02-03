@@ -21,7 +21,8 @@
     "autopep8.args": ["--max-line-length=100"],
     "C_Cpp.default.intelliSenseMode": "linux-gcc-x86",
     "C_Cpp.formatting": "disabled",
-    "uncrustify.configPath.linux": "/opt/ros/${env:ROS_DISTRO}/lib/ros_site_packages/ament_uncrustify/configuration/ament_code_style.cfg",
+    // uncrustify config - install via: sudo apt install uncrustify
+    // "uncrustify.configPath.linux": "/path/to/your/uncrustify.cfg",
     "[cpp]": {
         "editor.defaultFormatter": "zachflower.uncrustify"
     },
@@ -48,8 +49,8 @@
         "NOPASSWD",
         "noqa",
         "pytest",
-        "rclcpp",
-        "rclpy",
+        "roscpp",
+        "rospy",
         "repos",
         "rosdep",
         "rosdistro",
@@ -70,6 +71,6 @@
         ".vscode-insiders",
         ".devcontainer/devcontainer.json"
     ],
-    "ament-task-provider.envSetup": "source /opt/ros/${env:ROS_DISTRO}/setup.bash",
-    "ROS2.distro": "${env:ROS_DISTRO}",
+    "catkin-tools.envSetup": "source /opt/ros/${env:ROS_DISTRO}/setup.bash",
+    "ROS2.distro": "noetic",
 }

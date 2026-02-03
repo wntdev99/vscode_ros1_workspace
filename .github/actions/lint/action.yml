@@ -1,6 +1,6 @@
 name: 'Lint'
-description: 'Lint using devcontainer'
+description: 'Lint ROS1 code'
 runs:
   using: 'docker'
-  image: '../../../.devcontainer/Dockerfile'
+  image: 'docker://ubuntu:20.04'
   entrypoint: ".github/actions/lint/run.sh"

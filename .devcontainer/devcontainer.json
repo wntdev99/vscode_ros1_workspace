@@ -12,7 +12,7 @@
 		"options": ["--pull"]
 	},
 	"runArgs": [
-		"--name=watt-sim-gazebo",
+		"--name=watt-ros1-noetic-devcontainer",
 		"--network=host",
 		"--cap-add=SYS_PTRACE",
 		"--security-opt=seccomp:unconfined",

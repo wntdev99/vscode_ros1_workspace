@@ -11,7 +11,7 @@ repositories:
   watt_behavior:
     type: git
     url: git@github.com:3watt/watt_behaviors.git
-    version: porter-raemian-gallery
+    version: yeongtong-modelhouse
   flexbe_app:
     type: git
     url: https://github.com/FlexBE/flexbe_app.git
@@ -44,3 +44,7 @@ repositories:
     type: git
     url: https://github.com/kam3k/laser_line_extraction.git
     version: master
+  rplidar-s3-reflective-tape:
+    type: git
+    url: https://github.com/wntdev99/rplidar-s3-reflective-tape.git
+    version: main

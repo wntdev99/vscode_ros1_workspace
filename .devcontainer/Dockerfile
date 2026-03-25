@@ -6,6 +6,7 @@ RUN apt-get update \
    && apt-get -y install --no-install-recommends \
     bash-completion \
     gdb \
+    vlc \
     gettext-base \
     git-core \
     openssh-client \
@@ -14,6 +15,8 @@ RUN apt-get update \
     python3-osrf-pycommon \
     python3-rosdep \
     python3-vcstool \
+    python3-vlc \
+    python3-tk \
     sudo \
     # For GUI
     libx11-xcb1 libxcb1 libxcb-render0 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 \
@@ -29,12 +32,14 @@ RUN apt-get update \
     fonts-nanum fonts-nanum-coding locales \
     # For WATT users
     gedit \
+    sshpass \
     # ROS1 Noetic packages
     ros-noetic-topic-tools \
     ros-noetic-tf2-tools ros-noetic-rqt-tf-tree ros-noetic-tf2-sensor-msgs \
     ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-gazebo-ros-control \
     ros-noetic-navigation \
     ros-noetic-mbf-msgs \
+    ros-noetic-plotjuggler-ros \
     # Python packages
     python3-pip \
     python3-schedule \
@@ -47,7 +52,8 @@ RUN apt-get update \
     && locale-gen
 
 # Install Python packages
-RUN pip3 install --no-cache-dir pymsteams fastapi uvicorn firebase-admin
+RUN curl https://bootstrap.pypa.io/pip/3.8/get-pip.py | python3 \
+    && pip3 install --no-cache-dir pymsteams fastapi uvicorn firebase-admin numpy pandas
 ENV DEBIAN_FRONTEND=dialog
 ENV LANG=ko_KR.UTF-8
 ENV LC_ALL=ko_KR.UTF-8
@@ -168,6 +174,33 @@ RUN  echo "# WATT Customs" >> /home/$USERNAME/.bashrc \
   && echo "alias cs='cd /workspaces/vscode_ros1_workspace/src'" >> /home/$USERNAME/.bashrc \
   && echo "alias cb='cd /workspaces/vscode_ros1_workspace && ./build.sh'" >> /home/$USERNAME/.bashrc \
   && echo "alias cm='cd /workspaces/vscode_ros1_workspace && ./build.sh && source devel/setup.bash'" >> /home/$USERNAME/.bashrc
+
+# Set up additional WATT aliases (ROS master, SSH, sync)
+# shellcheck disable=SC2016
+RUN echo "" >> /home/$USERNAME/.bashrc \
+  && echo "# ROS Master URI aliases" >> /home/$USERNAME/.bashrc \
+  && echo "alias master_local='export ROS_MASTER_URI=http://localhost:11311;export ROS_HOSTNAME=localhost'" >> /home/$USERNAME/.bashrc \
+  && echo "alias master_g2='export ROS_MASTER_URI=http://192.168.34.202:11311;export ROS_HOSTNAME=\$HOSTIP'" >> /home/$USERNAME/.bashrc \
+  && echo "alias master_station='export ROS_MASTER_URI=http://192.168.34.203:11311; export ROS_HOSTNAME=\$(hostname -I | awk \"{print \\\$1}\")'" >> /home/$USERNAME/.bashrc \
+  && echo "alias master_cm4='export ROS_MASTER_URI=http://192.168.34.201:11311 && export ROS_HOSTNAME=\$HOSTIP'" >> /home/$USERNAME/.bashrc \
+  && echo "" >> /home/$USERNAME/.bashrc \
+  && echo "# FlexBE sync aliases" >> /home/$USERNAME/.bashrc \
+  && echo "alias sync_flexbe_local='roscd watt_flexbe_states/..&&git pull&&git add .&&git commit -m \"Update flexbe scenario\"&&git push'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sync_flexbe_g2='sshpass -p 3334 ssh james@192.168.34.202 \"cd /home/james/catkin_ws/src/watt_behaviors&&git pull\"'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sync_flexbe='roscd watt_flexbe_states/..&&git pull&&git add .&&git commit -m \"Update flexbe scenario\"&&git push && sshpass -p 3334 ssh james@192.168.34.202 \"cd /home/james/catkin_ws/src/watt_behaviors&&git pull\"'" >> /home/$USERNAME/.bashrc \
+  && echo "" >> /home/$USERNAME/.bashrc \
+  && echo "# SSH aliases" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshcm4='sshpass -p 3334 ssh ubuntu@192.168.34.201'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshcm4gui='ssh -X ubuntu@192.168.34.201'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshstation='sshpass -p 3334 ssh station@192.168.34.203'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshstationgui='sshpass -p 3334 ssh -X station@192.168.34.203'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshg2='sshpass -p 3334 ssh james@192.168.34.202'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshg2gui='ssh -X james@192.168.34.202'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshwatson='sshpass -p 3334 ssh watson@192.168.0.137'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshwatsongui='sshpass -p 3334 ssh -X watson@192.168.0.137'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshnuc='ssh station@192.168.34.203'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshnucgui='ssh -X station@192.168.34.203'" >> /home/$USERNAME/.bashrc \
+  && echo "alias sshdell='ssh jeongmin@192.168.0.120'" >> /home/$USERNAME/.bashrc
 
 # Set up python symlinks for vscode paths
 RUN PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')") \

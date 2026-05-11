@@ -168,6 +168,7 @@ RUN { \
 
 # Set up user bashrc (interactive shell customizations only)
 RUN  echo "# WATT Customs" >> /home/$USERNAME/.bashrc \
+  && echo "export HOSTIP=\$(hostname -I | awk '{print \$1}')" >> /home/$USERNAME/.bashrc \
   && echo "alias eb='gedit ~/.bashrc'" >> /home/$USERNAME/.bashrc \
   && echo "alias sb='source ~/.bashrc'" >> /home/$USERNAME/.bashrc \
   && echo "alias cw='cd /workspaces/vscode_ros1_workspace'" >> /home/$USERNAME/.bashrc \

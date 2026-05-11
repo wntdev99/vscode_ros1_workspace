@@ -51,7 +51,7 @@
 	},
 	"remoteUser": "watt",
 	"initializeCommand": "xhost +local:docker 2>/dev/null || true",
-	"postCreateCommand": "sudo chown watt:watt ${containerWorkspaceFolder}/src && vcs import ${containerWorkspaceFolder}/src < ${containerWorkspaceFolder}/ros1.repos && bash -c 'cd ${containerWorkspaceFolder} && source /opt/ros/${ROS_DISTRO}/setup.bash && catkin build'",
+	"postCreateCommand": "sudo chown watt:watt ${containerWorkspaceFolder}/src && vcs import ${containerWorkspaceFolder}/src < ${containerWorkspaceFolder}/ros1.repos && bash -c 'cd ${containerWorkspaceFolder} && for pkg in rosbag_rviz_panel; do [ -f \"$pkg/package.xml\" ] && [ ! -e \"src/$pkg\" ] && ln -sfn \"../$pkg\" \"src/$pkg\"; done && source /opt/ros/${ROS_DISTRO}/setup.bash && sudo apt-get update && rosdep install --from-paths src --ignore-src -y --rosdistro=${ROS_DISTRO} && catkin build'",
 	"postStartCommand": "sudo service dbus start 2>/dev/null || true; (rosdep update --rosdistro=$ROS_DISTRO 2>/dev/null || true)",
 	"mounts": [
 		// Claude Code 인증 정보 유지

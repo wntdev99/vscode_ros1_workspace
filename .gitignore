@@ -11,5 +11,8 @@ log/
 # Source (Docker volume)
 src/
 
+# rosbag 파일 (로컬-컨테이너 공유용, 용량 크므로 git 추적 안 함)
+bags/
+
 # Other
 site/

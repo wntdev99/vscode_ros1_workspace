@@ -40,6 +40,7 @@ RUN apt-get update \
     ros-noetic-navigation \
     ros-noetic-mbf-msgs \
     ros-noetic-plotjuggler-ros \
+    ros-noetic-rosserial-arduino \
     # Python packages
     python3-pip \
     python3-schedule \
@@ -201,7 +202,8 @@ RUN echo "" >> /home/$USERNAME/.bashrc \
   && echo "alias sshwatsongui='sshpass -p 3334 ssh -X watson@192.168.0.137'" >> /home/$USERNAME/.bashrc \
   && echo "alias sshnuc='ssh station@192.168.34.203'" >> /home/$USERNAME/.bashrc \
   && echo "alias sshnucgui='ssh -X station@192.168.34.203'" >> /home/$USERNAME/.bashrc \
-  && echo "alias sshdell='ssh jeongmin@192.168.0.120'" >> /home/$USERNAME/.bashrc
+  && echo "alias sshdell='ssh jeongmin@192.168.0.120'" >> /home/$USERNAME/.bashrc \
+  && echo "export DISABLE_ROS1_EOL_WARNINGS=1" >> /home/$USERNAME/.bashrc
 
 # Set up python symlinks for vscode paths
 RUN PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')") \

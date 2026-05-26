@@ -32,10 +32,14 @@ repositories:
     type: git
     url: git@github.com:3watt/watt_robot_hri.git
     version: main
-  watt_server:
+  # watt_server:
+  #   type: git
+  #   url: git@github.com:3watt/watt_server.git
+  #   version: porter-251031
+  rosbag_rviz_panel:
     type: git
-    url: git@github.com:3watt/watt_server.git
-    version: porter-251031
+    url: https://github.com/wattrobotics/rosbag_rviz_panel.git
+    version: main
   watt_robot_common:
     type: git
     url: git@github.com:3watt/watt_robot_common.git
@@ -48,3 +52,7 @@ repositories:
     type: git
     url: https://github.com/wntdev99/rplidar-s3-reflective-tape.git
     version: main
+  james_w1:
+    type: git
+    url:  https://github.com/wattrobotics/james_w1.git
+    version: porter-251031

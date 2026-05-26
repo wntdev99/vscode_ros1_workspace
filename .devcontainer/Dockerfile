@@ -50,7 +50,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     # Generate Korean locale
     && sed -i '/ko_KR.UTF-8/s/^# //g' /etc/locale.gen \
-    && locale-gen
+    && locale-gen \
+    # Rebuild font cache so Qt can find Nanum fonts
+    && fc-cache -fv
 
 # Install Python packages
 RUN curl https://bootstrap.pypa.io/pip/3.8/get-pip.py | python3 \
